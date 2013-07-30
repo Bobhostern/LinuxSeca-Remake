@@ -14,3 +14,4 @@ New features include:
 Thank you for staying with LinuxSeca!
 
 BTW: To start LinuxSeca, create a userdata.lsy file in this directory, then take a look at README.userdata for a (kinda) tutorial.
+You can find the CreateQDataFromXML QDataNGUIGen program code at https://github.com/Bobhostern/CreateLSRQDataFromXML.
