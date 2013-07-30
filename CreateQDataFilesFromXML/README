@@ -1,3 +1,0 @@
-This program requires the yaml-cpp library (included), the Xerces-C library, and premake4.
-Simply generate files with premake4, then build.
-The .lsybin file doesn't need to guarantee exact order (as each question is numbered), so the output will probably be quite mixed up.
