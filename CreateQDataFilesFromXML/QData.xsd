@@ -1,0 +1,116 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:annotation>
+		<xsd:documentation xml:lang="en">
+			XSD Schema for the XML form of a qdata file.
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:complexType name="qdata_t">
+		<xsd:choice>
+			<xsd:group ref="elementform" />
+			<xsd:group ref="attributeform" />
+		</xsd:choice>
+		<xsd:attribute name="type" type="typespec_t" use="required" />
+		<xsd:attribute name="name" type="xsd:string" use="required" />
+	</xsd:complexType>
+
+	<xsd:group name="elementform">
+		<xsd:sequence>
+			<xsd:element name="header" type="header_t" />
+			<xsd:element name="questions" type="questions_t" />
+		</xsd:sequence>
+	</xsd:group>
+
+	<xsd:group name="attributeform">
+		<xsd:sequence>
+			<xsd:element name="headera" type="headera_t" />
+			<xsd:element name="questionsa" type="questionsa_t" />
+		</xsd:sequence>
+	</xsd:group>
+
+	<xsd:complexType name="header_t">
+		<xsd:sequence>
+			<!-- Meta data -->
+			<xsd:element name="name" type="xsd:string" />
+			<xsd:element name="author" type="xsd:string" />
+			<xsd:element name="description" type="xsd:string" />
+			<xsd:element name="extra" type="xsd:string" />
+			<!-- Needed data -->
+			<xsd:element name="maxquestions" type="xsd:nonNegativeInteger" />
+			<!-- Special stuff -->
+			<xsd:element name="answernumberinput" type="xsd:boolean" minOccurs="0" />
+			<xsd:element name="skipisincorrect" type="xsd:boolean" minOccurs="0" />
+			<xsd:element name="quizmode" type="xsd:boolean" minOccurs="0" />
+			<xsd:element name="skipoverride" type="xsd:boolean" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="questions_t">
+		<xsd:sequence>
+			<xsd:element name="problem" type="question_t" minOccurs="0" maxOccurs="unbounded" />
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="question_t">
+		<xsd:sequence>
+			<xsd:element name="question" type="xsd:string" />
+			<xsd:element name="answers" type="answers_t" />
+			<xsd:element name="correctanswer" type="xsd:nonNegativeInteger" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="answers_t">
+		<xsd:sequence>
+			<xsd:element name="answer" type="xsd:string" maxOccurs="unbounded" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="headera_t">
+		<!-- Meta data -->
+		<xsd:attribute name="name" type="xsd:string" use="required" />
+		<xsd:attribute name="author" type="xsd:string" use="required" />
+		<xsd:attribute name="description" type="xsd:string" use="required" />
+		<xsd:attribute name="extra" type="xsd:string" use="required" />
+		<!-- Needed data -->
+		<xsd:attribute name="maxquestions" type="xsd:nonNegativeInteger" use="required" />
+		<!-- Special stuff -->
+		<xsd:attribute name="answernumberinput" type="xsd:boolean" />
+		<xsd:attribute name="skipisincorrect" type="xsd:boolean" />
+		<xsd:attribute name="quizmode" type="xsd:boolean" />
+		<xsd:attribute name="skipoverride" type="xsd:boolean" />
+	</xsd:complexType>
+
+	<xsd:complexType name="questionsa_t">
+		<xsd:sequence>
+			<xsd:element name="problem" type="questiona_t" minOccurs="0" maxOccurs="unbounded" />
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="questiona_t">
+		<xsd:sequence>
+			<xsd:element name="question" type="xsd:string" />
+			<xsd:element name="answers" type="answersa_t" />
+		</xsd:sequence>
+		<xsd:attribute name="correctanswer" type="xsd:nonNegativeInteger" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="answersa_t">
+		<xsd:sequence>
+			<xsd:element name="answer" type="answera_t" maxOccurs="unbounded" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="answera_t">
+		<xsd:attribute name="value" type="xsd:string" use="required" />
+	</xsd:complexType>
+
+	<xsd:simpleType name="typespec_t">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="ELEMENT" />
+			<xsd:enumeration value="ATTRIBUTE" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:element name="qdata" type="qdata_t" />
+
+</xsd:schema>

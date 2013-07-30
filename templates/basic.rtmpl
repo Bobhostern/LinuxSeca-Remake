@@ -1,0 +1,6 @@
+#!/bin/ruby
+
+@disp = "Test Results:
+	Tester Name: #{@name}
+	Test name: #{@datamap['header']['name']}
+	Result: #{@correct}/#{@correct + @incorrect + @skipped}"

@@ -1,0 +1,25 @@
+The userdata.lsy file is the user control file.
+This is an example.
+currentuser: JohnDoe
+users:
+    JohnDoe:
+        name: John Doe
+        age: 23
+        quote: I am an ordinary man in an ordinary world.
+        skipenabled: false
+        errorlevel: 0
+        templatefile: templates/template
+
+This is the explanation.
+currentuser - The user that LinuxSeca searches for.
+users - A list of all the users
+	JohnDoe - The name of this particular user. Can be anything else.
+		name - Name of this user
+		age - Age of user
+		quote - Just a quote for this user
+		skipenabled - Should skip be enabled for this user? (Boolean)
+		errorlevel - Error catching for template files for this user
+			0 - No errors are allowed
+			1 - SystemCallError is allowed (If you don't understand this, set this value to 2 instead)
+			2 - All errors are allowed
+		templatefile - The templatefile for this user (don't include the extension)

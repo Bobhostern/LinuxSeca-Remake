@@ -1,0 +1,36 @@
+A way to customize output is by using an .rtmpl file.
+By default, the program uses it's own template, but you can create your own custom output by following these instructions.
+
+First, create a file named "template.rtmpl" in the main directory. The script will detect this and will try to load it.
+Then, make the file! The file uses the Ruby syntax, so all of these variables MUST be enclosed in #{}.
+This is a Ruby script, so the entire file follows to following syntax. Return the string you want displayed to the "@disp" variable.
+
+Variables:
+	@name - User's name
+	@age - User's age
+	@quote - User's quote
+	map[:correct] or @correct - How many questions the user got correct
+	map[:incorrect] or @incorrect - How many questions the user got incorrect
+	map[:skipped] or @skipped - How many questions the user skipped
+	@datamap['header']['name'] - Test name
+	@datamap['header']['author'] - Test author
+	@datamap['header']['description'] - Test description
+	@datamap['header']['extra'] - Test extras
+	@qachecksheet - Contains the following elements (is a Ruby Hash)
+		key - question number (as symbol)
+		value - Contains (is a Ruby Hash)
+			:result - Numerical result: 0 - Incorrect, 1 - Correct, 2 - Skipped
+			:canswer - Correct Answer in text
+			:ncanswer - Correct Answer as a number
+			:uanswer - User-chosen answer as text
+			:nuanswer - User-chosen answer as a number
+	@skipincorrect - Are skips incorrect?
+	@ansnuminput - Are answers input as numbers?
+
+Example (really, really simple):
+Test Results:
+	Tester Name: #{@name}
+	Test Name: #{@datamap['header']['name']}
+	Result: #{@correct}/#{@correct + @incorrect}
+
+To see a sample that is an "Use in any Situation" template file, see templates/template.rtmpl.

@@ -1,0 +1,62 @@
+#!/bin/ruby
+qres = ""
+@qachecksheet.each do |key, value|
+	val = ""
+	extra = ""
+	if value[:result] == 1
+		val = "Correct"
+	elsif value[:result] == 2
+		if !@skipincorrect
+			val = "Skipped"
+		else
+			val = "Incorrect"
+			if !@ansnuminput
+				extra = " >> Correct Answer: #{value[:canswer]} ||| Your Answer: #{value[:uanswer]}"
+			else
+				extra = " >> Correct Answer: #{value[:ncanswer]} ||| Your Answer: #{value[:nuanswer]}"
+			end
+		end
+	else
+		val = "Incorrect"
+		if !@ansnuminput
+			extra = " >> Correct Answer: #{value[:canswer]} ||| Your Answer: #{value[:uanswer]}"
+		else
+			extra = " >> Correct Answer: #{value[:ncanswer]} ||| Your Answer: #{value[:nuanswer]}"
+		end
+	end
+	qres = qres + "\n\tQuestion ##{key}: #{val}#{extra}"
+end
+
+if !@skipincorrect
+	skipline = "\n\tSkipped: #{map[:skipped]}"
+end
+
+flags = ""
+if @skipincorrect and @enable_skip
+	flags << "SKIP_INCORRECT "
+end
+if @ansnuminput
+	flags << "ANSWER_NUMBER_INPUT "
+end
+if @quizmode
+	flags << "QUIZ_MODE "
+end
+if @enable_skip
+	flags << "SKIP_ENABLED "
+end
+
+@disp = "#-#-#-#_#-#-#-#LinuxSeca Remake Results#-#-#-#_#-#-#-#
+#-#-#-#-#-#-#-#-#-#-#-#-#--#-#-#-#-#-#-#-#-#-#-#-#-#-#
+Test Taker Info:
+	Name: #{@name}
+	Age: #{@age}
+	Quote: #{@quote}
+Test Results:
+	Correct: #{map[:correct]}
+	Incorrect: #{map[:incorrect]}#{skipline}
+	Test Info: #{@datamap['header']['name']} by #{@datamap['header']['author']}
+	Test Description: #{@datamap['header']['description']}
+	Extra: #{@datamap['header']['extra']}
+	Flags: #{flags}
+Test Questions Results:#{qres}
+#-#-#-#-#-#-#-#-#-#-#-#-#--#-#-#-#-#-#-#-#-#-#-#-#-#-#"

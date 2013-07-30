@@ -1,0 +1,18 @@
+header:
+  author: Bob Hostern
+  answernumberinput: true
+  skipisincorrect: false
+  name: A Test For The XML-to-YAML Test Converter
+  description: ""
+  extra: ""
+  maxquestions: 1
+  quizmode: false
+questions:
+  q1:
+    answers:
+      - 3
+      - 85
+      - 5
+      - 6
+    correctanswer: 3
+    question: What is the square root of 25?

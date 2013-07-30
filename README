@@ -1,0 +1,16 @@
+Welcome to LinuxSeca Remake!
+
+I decided the last LinuxSeca was not that featureful, so I rewrote LinuxSeca from the bottom up, and this is the product.
+New features include:
+	- A YAML based format for storing questions and answers (.lsybin format)
+	- A merged question and correct answer file format
+	- Data dumping (Just For Fun feature)
+	- Previous session loading support (through data dumping)
+	- Result file template support
+	- XML file format for easy conversion to .lsybin format using the CreateQDataFromXML QDataNGUIGen program
+	- Userdata file for multiple users on the same program
+	- And many more to come!
+
+Thank you for staying with LinuxSeca!
+
+BTW: To start LinuxSeca, create a userdata.lsy file in this directory, then take a look at README.userdata for a (kinda) tutorial.
