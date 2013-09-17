@@ -34,6 +34,7 @@ module LinuxSecaR
 		def start_first_time
 			# Try to load userdata.lsy
 			ldata = @lmarshal.loadData("userdata")
+			cuser = ldata['currentuser']
 			if ldata.is_a? NilClass
 				# Load userdata.lsy and dump it while you are at it
 				ldata = @lmarshal.dumpYAMLData("userdata")
@@ -42,7 +43,6 @@ module LinuxSecaR
 					raise LinuxSecaR::LSRuntimeError, 'userdata.lsy is missing!'
 				end
 			end
-			cuser = ldata['currentuser']
 			qfiles = {}
 			iter = 1
 			ans = 0
