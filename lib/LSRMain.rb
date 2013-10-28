@@ -69,24 +69,28 @@ module LinuxSecaR
 		end
 
 		def start
+		
 			if @datamap['header'].fetch('skipoverride', nil).is_a? Boolean
 				if !@datamap['header'].fetch('skipoverride', nil).is_a? NilClass
 					@enable_skip = @datamap['header'].fetch('skipoverride')
 				end
 			end
-			puts "============IMPORTANT============"
-			if @ansnuminput
-				puts "Answer number input has been enabled for this test.\n" \
-					 "Input the answer NUMBER, not the answer inself.\n"
+			
+			if @ansnuminput or (@skipincorrect and @enable_skip) or @quizmode
+				puts "============IMPORTANT============"
+				if @ansnuminput
+					puts "Answer number input has been enabled for this test.\n" \
+						 "Input the answer NUMBER, not the answer inself.\n"
+				end
+				if @skipincorrect and @enable_skip
+					puts "WARNING: Skipping a question is considered incorrect."
+				end
+				if @quizmode
+					puts "This test is in quiz mode.\n" \
+						 "One incorrect answer will end the test.\n"
+				end
+				puts "================================="
 			end
-			if @skipincorrect and @enable_skip
-				puts "WARNING: Skipping a question is considered incorrect."
-			end
-			if @quizmode
-				puts "This test is in quiz mode.\n" \
-					 "One incorrect answer will end the test.\n"
-			end
-			puts "================================="
 			iters = @datamap['header']['maxquestions'].to_i
 			item = 1
 			iters.times do
