@@ -91,6 +91,7 @@ module LinuxSecaR
 				end
 				puts "================================="
 			end
+			puts 
 			iters = @datamap['header']['maxquestions'].to_i
 			item = 1
 			iters.times do
